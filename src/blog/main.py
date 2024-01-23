@@ -1,13 +1,14 @@
 from fastapi import FastAPI
+from blog.resources import router
 
 app = FastAPI()
 
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
+def get_app():
+    app = FastAPI()
 
+    app.include_router(router)
 
-@app.get("/hello/{name}")
-async def say_hello(name: str):
-    return {"message": f"Hello {name}"}
+    return app
+
+app = get_app()
